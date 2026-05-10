@@ -801,19 +801,14 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #FFFFFF;
     transition: var(--transition);
 }
 
 .footer-socials a svg {
     width: 20px;
     height: 20px;
-    stroke: #FFFFFF !important;
-    color: #FFFFFF !important;
-}
-
-.footer-socials i {
-    color: #FFFFFF !important;
+    stroke: currentColor;
 }
 
 .footer-socials a:hover {
