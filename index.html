@@ -40,7 +40,12 @@
                 <a href="#products">Produkte</a>
                 <a href="#contact">Kontakt</a>
             </div>
-            <a href="#contact" class="btn btn-primary nav-btn">Jetzt Buchen</a>
+            <div class="nav-actions">
+                <a href="#contact" class="btn btn-primary nav-btn">Jetzt Buchen</a>
+                <button class="mobile-toggle" aria-label="Menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -321,19 +326,40 @@
     </section>
 
     <!-- Footer -->
+    <!-- Footer -->
     <footer>
         <div class="footer-container">
             <div class="footer-brand">
                 <img src="assets/logo.png" alt="Blink Logo" class="footer-logo">
-                <p>Premium Nails & Lashes by Bãlașa Anamaria</p>
+                <p>Premium Nagel- & Wimpern-Ästhetik in Salzburg. Wir unterstreichen Ihre natürliche Schönheit mit höchster Präzision.</p>
+                <div class="footer-info">
+                    <p>Bãlașa Anamaria</p>
+                    <p>5020 Salzburg</p>
+                </div>
             </div>
-            <div class="footer-socials">
-                <a href="https://www.instagram.com/blinksalzburg/" target="_blank"><i data-lucide="instagram"></i></a>
-                <a href="mailto:balasa.anamaria@yahoo.com"><i data-lucide="mail"></i></a>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#about">Das Studio</a></li>
+                    <li><a href="#services">Leistungen</a></li>
+                    <li><a href="#nails">Nägel</a></li>
+                    <li><a href="#products">Produkte</a></li>
+                    <li><a href="#contact">Termin buchen</a></li>
+                </ul>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Blink Nails & Lashes. Alle Rechte vorbehalten.</p>
+            
+            <div class="footer-social">
+                <h4>Folge uns</h4>
+                <a href="https://www.instagram.com/blink_nails_lashes_salzburg/" target="_blank" class="instagram-btn">
+                    <i data-lucide="instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">balasa.anamaria@yahoo.com</p>
             </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Blink Nails & Lashes Salzburg. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
 
@@ -357,6 +383,31 @@
             } else {
                 nav.classList.remove('scrolled');
             }
+        });
+
+        // Mobile Menu Toggle
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileToggle.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.setAttribute('data-lucide', 'x');
+            } else {
+                icon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons();
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileToggle.querySelector('i');
+                icon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
         });
 
         // Booking System Logic
