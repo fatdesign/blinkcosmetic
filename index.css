@@ -250,23 +250,24 @@ a {
 
 @media (max-width: 767px) {
     .nav-container {
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
+        display: flex;
+        justify-content: space-between;
         align-items: center;
+        padding: 0 1.5rem;
     }
 
     .logo {
-        grid-column: 2;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .nav-actions {
-        grid-column: 1;
-        justify-self: start;
+        display: none;
     }
 
     .menu-toggle {
-        grid-column: 3;
-        justify-self: end;
+        margin-left: auto;
     }
 
     .nav-links {
@@ -772,10 +773,18 @@ footer {
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
+    transition: var(--transition);
+}
+
+.footer-socials a svg {
+    width: 20px;
+    height: 20px;
+    stroke: white;
 }
 
 .footer-socials a:hover {
