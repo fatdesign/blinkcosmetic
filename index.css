@@ -254,7 +254,7 @@ a {
         justify-content: space-between;
         align-items: center;
         padding: 0 1.5rem;
-        min-height: 80px; /* Sicherstellen, dass die Leiste nicht zu schmal wird */
+        min-height: 90px; /* Mehr Platz für das Logo */
         position: relative;
     }
 
@@ -269,8 +269,14 @@ a {
     }
 
     .logo img {
-        height: 50px; /* Etwas kleiner für besseren Halt auf dem Handy */
+        height: 70px; /* Angenehmere Größe für das Handy */
         width: auto;
+        transition: none; /* Kein Flackern beim Scrollen auf dem Handy */
+    }
+
+    /* Verhindern, dass die .scrolled Klasse das Logo auf dem Handy wieder vergrößert */
+    .navbar.scrolled .logo img {
+        height: 70px;
     }
 
     .nav-actions {
