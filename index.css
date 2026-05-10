@@ -39,6 +39,10 @@ body {
     overflow-x: hidden;
 }
 
+body.no-scroll {
+    overflow: hidden;
+}
+
 h1,
 h2,
 h3,
@@ -253,6 +257,16 @@ a {
 
     .logo {
         grid-column: 2;
+    }
+
+    .nav-actions {
+        grid-column: 1;
+        justify-self: start;
+    }
+
+    .menu-toggle {
+        grid-column: 3;
+        justify-self: end;
     }
 
     .nav-links {

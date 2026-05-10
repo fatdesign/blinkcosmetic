@@ -30,11 +30,9 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <button class="menu-toggle" id="menuToggle" aria-label="Menü">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <div class="nav-actions">
+                <a href="#contact" class="btn btn-primary nav-btn">Jetzt Buchen</a>
+            </div>
             
             <a href="#" class="logo">
                 <img src="assets/logo.png" alt="Blink Logo">
@@ -48,9 +46,11 @@
                 <a href="#contact">Kontakt</a>
             </div>
 
-            <div class="nav-actions">
-                <a href="#contact" class="btn btn-primary nav-btn">Jetzt Buchen</a>
-            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menü">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
@@ -375,10 +375,12 @@
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
+        const body = document.body;
         
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             menuToggle.classList.toggle('active');
+            body.classList.toggle('no-scroll');
         });
 
         // Close menu on link click
@@ -386,6 +388,7 @@
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
                 menuToggle.classList.remove('active');
+                body.classList.remove('no-scroll');
             });
         });
 
