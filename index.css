@@ -254,8 +254,13 @@ a {
         justify-content: space-between;
         align-items: center;
         padding: 0 1.5rem;
-        min-height: 90px; /* Mehr Platz für das Logo */
+        min-height: 110px; /* Mehr Platz für das große Logo am Anfang */
+        transition: min-height 0.3s ease;
         position: relative;
+    }
+
+    .navbar.scrolled .nav-container {
+        min-height: 80px; /* Kleiner beim Scrollen */
     }
 
     .logo {
@@ -269,12 +274,12 @@ a {
     }
 
     .logo img {
-        height: 70px; /* Angenehmere Größe für das Handy */
+        height: 95px; /* Anfangs groß wie gewünscht */
         width: auto;
-        transition: none; /* Kein Flackern beim Scrollen auf dem Handy */
+        transition: height 0.3s ease; /* Sanfter Übergang beim Scrollen */
     }
 
-    /* Verhindern, dass die .scrolled Klasse das Logo auf dem Handy wieder vergrößert */
+    /* Auf dem Handy verkleinern, wenn gescrollt wird */
     .navbar.scrolled .logo img {
         height: 70px;
     }
