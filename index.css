@@ -212,55 +212,20 @@ a {
     background: var(--surface-alt);
 }
 
+@media (min-width: 768px) {
+    .nav-links {
+        display: flex;
+    }
+}
+
 .nav-btn {
     display: none;
 }
 
 @media (min-width: 768px) {
-    .nav-links {
-        display: flex;
-    }
-
     .nav-btn {
         display: inline-flex;
         padding: 0.6rem 1.5rem;
-    }
-}
-
-.mobile-toggle {
-    display: none;
-    background: transparent;
-    border: none;
-    color: var(--text-main);
-    cursor: pointer;
-    padding: 0.5rem;
-    transition: var(--transition);
-}
-
-@media (max-width: 767px) {
-    .mobile-toggle {
-        display: flex;
-    }
-    
-    .nav-links {
-        position: fixed;
-        top: 80px;
-        left: 0;
-        width: 100%;
-        background: white;
-        flex-direction: column;
-        padding: 2rem;
-        gap: 1.5rem;
-        text-align: center;
-        box-shadow: var(--shadow-md);
-        transform: translateY(-150%);
-        transition: var(--transition);
-        z-index: 999;
-    }
-
-    .nav-links.active {
-        transform: translateY(0);
-        display: flex;
     }
 }
 
@@ -387,8 +352,6 @@ a {
 }
 
 .about-image img {
-    width: 100%;
-    height: auto;
     border-radius: 20px;
     box-shadow: var(--shadow-lg);
     position: relative;
@@ -652,8 +615,6 @@ a {
 .form-group input,
 .form-group select {
     width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
     padding: 1rem 1.2rem;
     border: 1px solid #E5DDE1;
     border-radius: 8px;
@@ -676,12 +637,59 @@ a {
 footer {
     background-color: var(--text-main);
     color: white;
-    padding: 5rem 2rem 2rem;
+    padding: 4rem 2rem 2rem;
 }
 
 .footer-container {
     max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+}
+
+.footer-logo {
+    height: 60px;
+    margin-bottom: 1rem;
+    filter: brightness(0) invert(1);
+}
+
+.footer-brand p {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-socials {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-socials a {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-socials a:hover {
+    background: var(--accent);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
 }
 
 /* ==========================================================================
