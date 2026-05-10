@@ -400,6 +400,8 @@ a {
     width: 100%;
     max-width: 450px;
     margin: 0 auto;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .about-image img {
@@ -668,6 +670,8 @@ a {
 .form-group input,
 .form-group select {
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     padding: 1rem 1.2rem;
     border: 1px solid #E5DDE1;
     border-radius: 8px;
