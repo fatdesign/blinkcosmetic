@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blink Termine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8f9fa;
+            --accent: #FF007F;
+            --text: #2D0B1F;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        h1,
+        h2 {
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: #fafafa;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            border: none;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        input,
+        select {
+            padding: 0.6rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slot-tag {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            background: #eee;
+            border-radius: 4px;
+            margin: 0.2rem;
+            cursor: pointer;
+        }
+
+        .slot-tag.active {
+            background: var(--accent);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Blink Termine</h1>
+
+        <div class="card">
+            <h2>Termine verwalten (Slots)</h2>
+            <div class="form-group">
+                <label>Datum wählen</label>
+                <input type="date" id="adminDate">
+            </div>
+            <div id="slotPicker">
+                <p>Wählen Sie ein Datum, um Slots zu bearbeiten.</p>
+            </div>
+            <button id="saveSlots" class="btn btn-primary" style="margin-top: 1rem;">Slots speichern</button>
+        </div>
+
+        <div class="card">
+            <h2>Alle Buchungen</h2>
+            <table id="bookingsTable">
+                <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Zeit</th>
+                        <th>Service</th>
+                        <th>Kunde</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Injected here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://blinkcosmetic.f-klavun.workers.dev';
+        const slots = ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00"];
+        let activeSlots = [];
+
+        document.getElementById('adminDate').addEventListener('change', async (e) => {
+            const date = e.target.value;
+            // Fetch current slots for this date
+            const res = await fetch(`${API_URL}/api/times?date=${date}`);
+            activeSlots = await res.json();
+            renderSlotPicker();
+        });
+
+        function renderSlotPicker() {
+            const container = document.getElementById('slotPicker');
+            container.innerHTML = '';
+            slots.forEach(s => {
+                const tag = document.createElement('span');
+                tag.className = `slot-tag ${activeSlots.includes(s) ? 'active' : ''}`;
+                tag.textContent = s;
+                tag.onclick = () => {
+                    if (activeSlots.includes(s)) activeSlots = activeSlots.filter(x => x !== s);
+                    else activeSlots.push(s);
+                    renderSlotPicker();
+                };
+                container.appendChild(tag);
+            });
+        }
+
+        document.getElementById('saveSlots').onclick = async () => {
+            const date = document.getElementById('adminDate').value;
+            if (!date) return alert('Datum wählen');
+            await fetch(`${API_URL}/api/admin/slots`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ date, slots: activeSlots })
+            });
+            alert('Slots gespeichert!');
+        };
+
+        async function loadBookings() {
+            const res = await fetch(`${API_URL}/api/admin/all-bookings`);
+            const bookings = await res.json();
+            const tbody = document.querySelector('#bookingsTable tbody');
+            tbody.innerHTML = '';
+            bookings.sort((a, b) => new Date(a.date) - new Date(b.date)).forEach(b => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${b.date}</td>
+                        <td>${b.time}</td>
+                        <td>${b.service}</td>
+                        <td>${b.name}</td>
+                        <td>${b.email}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        loadBookings();
+    </script>
+</body>
+
+</html>
