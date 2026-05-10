@@ -254,12 +254,23 @@ a {
         justify-content: space-between;
         align-items: center;
         padding: 0 1.5rem;
+        min-height: 80px; /* Sicherstellen, dass die Leiste nicht zu schmal wird */
+        position: relative;
     }
 
     .logo {
         position: absolute;
         left: 50%;
-        transform: translateX(-50%);
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo img {
+        height: 50px; /* Etwas kleiner für besseren Halt auf dem Handy */
+        width: auto;
     }
 
     .nav-actions {
@@ -760,8 +771,15 @@ footer {
     filter: brightness(0) invert(1);
 }
 
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .footer-brand p {
     color: rgba(255, 255, 255, 0.7);
+    margin: 0 auto;
 }
 
 .footer-socials {
@@ -784,7 +802,12 @@ footer {
 .footer-socials a svg {
     width: 20px;
     height: 20px;
-    stroke: white;
+    stroke: #FFFFFF !important;
+    color: #FFFFFF !important;
+}
+
+.footer-socials i {
+    color: #FFFFFF !important;
 }
 
 .footer-socials a:hover {
