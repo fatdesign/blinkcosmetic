@@ -30,8 +30,10 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <button class="menu-toggle" id="menuToggle">
-                <i data-lucide="menu"></i>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menü">
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
             
             <a href="#" class="logo">
@@ -376,21 +378,14 @@
         
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            const icon = menuToggle.querySelector('i');
-            if (navLinks.classList.contains('active')) {
-                icon.setAttribute('data-lucide', 'x');
-            } else {
-                icon.setAttribute('data-lucide', 'menu');
-            }
-            lucide.createIcons();
+            menuToggle.classList.toggle('active');
         });
 
         // Close menu on link click
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
-                menuToggle.querySelector('i').setAttribute('data-lucide', 'menu');
-                lucide.createIcons();
+                menuToggle.classList.remove('active');
             });
         });
 
